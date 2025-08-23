@@ -1,15 +1,15 @@
-name: Java CI with Maven and Docker
+name: Create and publish a Docker image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
 env:
-  DOCKERHUB_USERNAME: arturix
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
-
+  build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -18,67 +18,56 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up JDK 21
-      uses: actions/setup-java@v3
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build with Maven
-      run: mvn -B package --file cloud/cloud-config-server/pom.xml && mvn -B package --file cloud/cloud-hello-service/pom.xml
+      - name: Extract metadata for config-server
+        id: meta-config-server
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/cloud-config-server
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      - name: Build and push config-server
+        id: push-config-server
+        uses: docker/build-push-action@v4
+        with:
+          context: cloud/cloud-config-server
+          push: true
+          tags: ${{ steps.meta-config-server.outputs.tags }}
+          labels: ${{ steps.meta-config-server.outputs.labels }}
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ env.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Extract metadata for hello-service
+        id: meta-hello-service
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/cloud-hello-service
 
-    - name: Extract metadata for config-server
-      id: meta-config-server
-      uses: docker/metadata-action@v4
-      with:
-        images: ${{ env.DOCKERHUB_USERNAME }}/cloud-config-server
+      - name: Build and push hello-service
+        id: push-hello-service
+        uses: docker/build-push-action@v4
+        with:
+          context: cloud/cloud-hello-service
+          push: true
+          tags: ${{ steps.meta-hello-service.outputs.tags }}
+          labels: ${{ steps.meta-hello-service.outputs.labels }}
 
-    - name: Build and push config-server
-      id: push-config-server
-      uses: docker/build-push-action@v4
-      with:
-        context: cloud/cloud-config-server
-        push: true
-        tags: ${{ steps.meta-config-server.outputs.tags }}
-        labels: ${{ steps.meta-config-server.outputs.labels }}
+      - name: Generate artifact attestation for config-server
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/cloud-config-server
+          subject-digest: ${{ steps.push-config-server.outputs.digest }}
+          push-to-registry: true
 
-    - name: Extract metadata for hello-service
-      id: meta-hello-service
-      uses: docker/metadata-action@v4
-      with:
-        images: ${{ env.DOCKERHUB_USERNAME }}/cloud-hello-service
-
-    - name: Build and push hello-service
-      id: push-hello-service
-      uses: docker/build-push-action@v4
-      with:
-        context: cloud/cloud-hello-service
-        push: true
-        tags: ${{ steps.meta-hello-service.outputs.tags }}
-        labels: ${{ steps.meta-hello-service.outputs.labels }}
-
-    - name: Generate artifact attestation for config-server
-      uses: actions/attest-build-provenance@v1
-      with:
-        subject-name: index.docker.io/${{ env.DOCKERHUB_USERNAME }}/cloud-config-server
-        subject-digest: ${{ steps.push-config-server.outputs.digest }}
-        push-to-registry: true
-
-    - name: Generate artifact attestation for hello-service
-      uses: actions/attest-build-provenance@v1
-      with:
-        subject-name: index.docker.io/${{ env.DOCKERHUB_USERNAME }}/cloud-hello-service
-        subject-digest: ${{ steps.push-hello-service.outputs.digest }}
-        push-to-registry: true
+      - name: Generate artifact attestation for hello-service
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/cloud-hello-service
+          subject-digest: ${{ steps.push-hello-service.outputs.digest }}
+          push-to-registry: true
