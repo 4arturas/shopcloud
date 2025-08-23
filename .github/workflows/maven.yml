@@ -63,3 +63,4 @@ jobs:
         -var="hello_service_image=${{ env.DOCKERHUB_USERNAME }}/cloud-hello-service:latest"
       env:
         KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
