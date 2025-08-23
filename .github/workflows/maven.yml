@@ -1,4 +1,4 @@
-name: Java CI with Maven, Docker, and Terraform
+name: Java CI with Maven and Docker
 
 on:
   push:
@@ -82,19 +82,3 @@ jobs:
         subject-name: index.docker.io/${{ env.DOCKERHUB_USERNAME }}/cloud-hello-service
         subject-digest: ${{ steps.push-hello-service.outputs.digest }}
         push-to-registry: true
-
-    - name: Set up Terraform
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.0.0
-
-    - name: Terraform Init
-      run: terraform -chdir=shopcloud-infra init
-
-    - name: Terraform Apply
-      run: |
-        terraform -chdir=shopcloud-infra apply -auto-approve \
-        -var="config_server_image=${{ env.DOCKERHUB_USERNAME }}/cloud-config-server:latest" \
-        -var="hello_service_image=${{ env.DOCKERHUB_USERNAME }}/cloud-hello-service:latest"
-      env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
