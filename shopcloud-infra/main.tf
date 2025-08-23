@@ -220,13 +220,13 @@ resource "kubernetes_manifest" "shopcloud_argocd_application" {
     spec = {
       project = "default"
       source = {
-        repoURL        = "YOUR_GITHUB_REPO_URL" # REPLACE THIS WITH YOUR ACTUAL GITHUB REPO URL
+        repoURL        = "https://github.com/4arturas/shopcloud.git"
         targetRevision = "HEAD"
-        path           = "shopcloud-infra" # Path to your Kubernetes manifests within this repo
+        path           = "shopcloud-infra"
       }
       destination = {
         server    = "https://kubernetes.default.svc"
-        namespace = "shopcloud" # The namespace where your applications will be deployed
+        namespace = "shopcloud"
       }
       syncPolicy = {
         automated = {
