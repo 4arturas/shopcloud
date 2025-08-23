@@ -1,9 +1,7 @@
-name: Java CI with Docker
+name: Java CI with Docker 2
 
-on:
-  push:
-    branches: [ "main" ]
-
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
