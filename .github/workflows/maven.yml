@@ -1,4 +1,4 @@
-name: Java CI with Docker 2
+name: Java CI with Docker
 
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
