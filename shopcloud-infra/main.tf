@@ -5,6 +5,14 @@ terraform {
       source = "hashicorp/kubernetes"
       version = "2.11.0"
     }
+    kubernetes-alpha = {
+      source = "hashicorp/kubernetes-alpha"
+      version = "0.5.0"
+    }
+    helm = {
+      source = "hashicorp/helm"
+      version = "2.11.0"
+    }
     docker = {
       source  = "kreuzwerker/docker"
       version = "~> 3.0.1"
@@ -14,6 +22,16 @@ terraform {
 
 provider "kubernetes" {
   config_path = "~/.kube/config"
+}
+
+provider "kubernetes-alpha" {
+  config_path = "~/.kube/config"
+}
+
+provider "helm" {
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
 }
 
 provider "docker" {}
@@ -168,6 +186,58 @@ resource "kubernetes_service" "hello_service_service" {
       target_port = 8080
     }
     type = "ClusterIP"
+  }
+}
+
+
+
+
+
+resource "helm_release" "argocd" {
+  name       = "argocd"
+  repository = "https://argoproj.github.io/argo-helm"
+  chart      = "argo-cd"
+  version    = "8.3.0" # Using the version from the fragment
+
+  namespace = "argocd"
+
+  create_namespace = true
+
+  set {
+    name  = "server.service.type"
+    value = "NodePort"
+  }
+}
+
+resource "kubernetes_manifest" "shopcloud_argocd_application" {
+  manifest = {
+    apiVersion = "argoproj.io/v1alpha1"
+    kind       = "Application"
+    metadata = {
+      name      = "shopcloud-app"
+      namespace = "argocd" # ArgoCD applications are typically defined in the argocd namespace
+    }
+    spec = {
+      project = "default"
+      source = {
+        repoURL        = "YOUR_GITHUB_REPO_URL" # REPLACE THIS WITH YOUR ACTUAL GITHUB REPO URL
+        targetRevision = "HEAD"
+        path           = "shopcloud-infra" # Path to your Kubernetes manifests within this repo
+      }
+      destination = {
+        server    = "https://kubernetes.default.svc"
+        namespace = "shopcloud" # The namespace where your applications will be deployed
+      }
+      syncPolicy = {
+        automated = {
+          prune      = true
+          selfHeal   = true
+        }
+        syncOptions = [
+          "CreateNamespace=true"
+        ]
+      }
+    }
   }
 }
 
