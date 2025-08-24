@@ -47,8 +47,8 @@ jobs:
 
       - name: Update Kubernetes manifests
         run: |
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:${{ github.sha }}|g" kubernetes-manifests/config-server-deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:${{ github.sha }}|g" kubernetes-manifests/hello-service-deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:${{ github.sha }}|g" argocd/base/config-server/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:${{ github.sha }}|g" argocd/base/hello-service/deployment.yaml
 
       - name: Commit and push if changed
         run: |
