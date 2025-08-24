@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-server-config
+data:
+  application.yml: |
+    spring:
+      cloud:
+        config:
+          server:
+            git:
+              uri: https://github.com/4arturas/shopcloud-config
+              default-label: main
+  hello-service.yml: |
+    server:
+      port: 8080
+    greeting: "Hello from Config Server!"

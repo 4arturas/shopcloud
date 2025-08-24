@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shopcloud-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/4arturas/shopcloud.git'
+    targetRevision: HEAD
+    path: argocd
+    kustomize:
+      images:
+        - cloud-config-server=arturix/cloud-config-server:latest
+        - cloud-hello-service=arturix/cloud-hello-service:latest
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: shopcloud
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
