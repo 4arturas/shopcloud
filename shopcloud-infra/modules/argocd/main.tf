@@ -12,9 +12,50 @@ resource "helm_release" "argocd" {
     name  = "server.service.type"
     value = "NodePort"
   }
+
+  set {
+    name  = "server.ingress.enabled"
+    value = "true"
+  }
+
+  set {
+    name = "server.ingress.hosts[0]"
+    value = "argocd.example.com"
+  }
+}
+
+resource "kubernetes_ingress_v1" "argocd_server_ingress" {
+  metadata {
+    name      = "argocd-server-ingress"
+    namespace = "argocd"
+    annotations = {
+      "kubernetes.io/ingress.class" = "nginx"
+    }
+  }
+
+  spec {
+    rule {
+      host = "argocd.example.com"
+      http {
+        path {
+          path = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "argocd-server"
+              port {
+                number = 80
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 resource "kubernetes_manifest" "shopcloud_argocd_application" {
+  depends_on = [helm_release.argocd]
   manifest = {
     apiVersion = "argoproj.io/v1alpha1"
     kind       = "Application"
