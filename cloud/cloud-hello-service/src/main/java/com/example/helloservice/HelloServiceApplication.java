@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 @RestController
 public class HelloServiceApplication {
 
-	@Value("${message:Hello from default message!}")
+	@Value("${message:Hello from default message!!!!!}")
 	private String message;
 
 	public static void main(String[] args) {
