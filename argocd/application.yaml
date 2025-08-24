@@ -5,16 +5,15 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/refresh: "true"
+    # Dummy annotation to force refresh
+    argocd.argoproj.io/dummy-refresh: "$(date +%s)"
 spec:
   project: default
   source:
     repoURL: 'https://github.com/4arturas/shopcloud.git'
     targetRevision: HEAD
     path: argocd/base
-    kustomize:
-      images:
-        - cloud-config-server=arturix/cloud-config-server:latest
-        - cloud-hello-service=arturix/cloud-hello-service:latest
+    
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: shopcloud
