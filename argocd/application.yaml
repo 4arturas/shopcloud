@@ -3,12 +3,14 @@ kind: Application
 metadata:
   name: shopcloud-app
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/refresh: "true"
 spec:
   project: default
   source:
     repoURL: 'https://github.com/4arturas/shopcloud.git'
     targetRevision: HEAD
-    path: argocd
+    path: argocd/base
     kustomize:
       images:
         - cloud-config-server=arturix/cloud-config-server:latest
