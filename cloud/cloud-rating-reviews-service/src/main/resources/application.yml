@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: rating-reviews-service
+  config:
+    import: "optional:configserver:http://config-server:8080"
+
+server:
+  port: 8080
