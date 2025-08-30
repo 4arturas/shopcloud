@@ -17,6 +17,7 @@ spec:
       containers:
         - name: rating-reviews-service
           image: arturix/cloud-rating-reviews-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
