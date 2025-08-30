@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: config-server
-          image: arturix/cloud-config-server:9807201f518c4ebb7708fc20fdc1bf30eb70e036
+          image: arturix/cloud-config-server:bd6ada5f042603d8ceb535253caf0c1332f6f982
           ports:
             - containerPort: 8888
           env:
