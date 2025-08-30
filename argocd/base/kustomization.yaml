@@ -15,8 +15,8 @@ resources:
   - product-service/service.yaml
   - order-service/deployment.yaml
   - order-service/service.yaml
-#  - inventory-service/deployment.yaml
-#  - inventory-service/service.yaml
+  - inventory-service/deployment.yaml
+  - inventory-service/service.yaml
 #  - user-service/deployment.yaml
 #  - user-service/service.yaml
 #  - notification-service/deployment.yaml
