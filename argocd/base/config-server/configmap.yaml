@@ -4,7 +4,7 @@ metadata:
   name: config-server-config
 data:
   application.yml: |
-    # No global configuration
+    {}
   api-gateway.yml: |
     server:
       port: 8080
