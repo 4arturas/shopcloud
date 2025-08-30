@@ -1,13 +1,19 @@
 package com.example.orderservice.client;
 
 import com.example.orderservice.dto.Product;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-@FeignClient(name = "product-service", url = "http://product-service:8082")
-public interface ProductClient {
+@Component
+public class ProductClient {
 
-    @GetMapping("/products/{id}")
-    Product findById(@PathVariable("id") Long id);
+    private final RestTemplate restTemplate;
+
+    public ProductClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
+    public Product findById(Long id) {
+        return restTemplate.getForObject("http://product-service:8082/products/{id}", Product.class, id);
+    }
 }
