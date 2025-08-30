@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: arturix/cloud-api-gateway:d22573da9b20aac65063a52328598a29389aa0aa
+          image: arturix/cloud-api-gateway:b45e514da577f86a093190e907309750661f19ef
           ports:
             - containerPort: 8080
           env:
