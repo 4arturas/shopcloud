@@ -2,6 +2,8 @@ name: Java CI with Docker
 
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+permissions:
+  contents: write
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
