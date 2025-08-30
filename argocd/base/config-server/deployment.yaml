@@ -21,7 +21,12 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "git"
+              value: "native"
+            - name: SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS
+              value: "file:/config"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
           readinessProbe:
             httpGet:
               path: /actuator/health
@@ -34,4 +39,8 @@ spec:
               port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
+      volumes:
+        - name: config-volume
+          configMap:
+            name: config-server-config
       
