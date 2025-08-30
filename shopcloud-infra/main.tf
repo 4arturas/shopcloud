@@ -35,11 +35,39 @@ provider "helm" {
 
 provider "docker" {}
 
-# Kafka Resources
+# Docker Network
 resource "docker_network" "kafka_network" {
   name = "kafka_network"
 }
 
+# PostgreSQL Resources
+resource "docker_image" "postgres_image" {
+  name = "postgres:15-alpine"
+}
+
+resource "docker_container" "postgres" {
+  name  = "postgres"
+  image = docker_image.postgres_image.image_id
+  networks_advanced {
+    name = docker_network.kafka_network.name
+  }
+  ports {
+    internal = 5432
+    external = 5432
+  }
+  env = [
+    "POSTGRES_DB=shopcloud",
+    "POSTGRES_USER=postgres",
+    "POSTGRES_PASSWORD=postgres",
+    "POSTGRES_HOST_AUTH_METHOD=trust"
+  ]
+  volumes {
+    container_path = "/var/lib/postgresql/data"
+    host_path      = "/tmp/postgres-data" # You might want to use a proper volume
+  }
+}
+
+# Kafka Resources
 resource "docker_image" "zookeeper_image" {
   name = "confluentinc/cp-zookeeper:latest"
 }
@@ -253,4 +281,16 @@ variable "target_namespace" {
   description = "Target namespace for ArgoCD application"
   type        = string
   default     = "shopcloud"
+}
+
+# Output PostgreSQL connection details
+output "postgres_connection" {
+  value = {
+    host     = "localhost"
+    port     = 5432
+    database = "shopcloud"
+    username = "postgres"
+    password = "postgres"
+  }
+  description = "PostgreSQL connection details"
 }

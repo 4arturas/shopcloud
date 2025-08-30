@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rating-reviews-service
+  labels:
+    app: rating-reviews-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rating-reviews-service
+  template:
+    metadata:
+      labels:
+        app: rating-reviews-service
+    spec:
+      containers:
+        - name: rating-reviews-service
+          image: arturix/cloud-rating-reviews-service:latest
+          ports:
+            - containerPort: 8087
+          env:
+            - name: SPRING_CONFIG_IMPORT
+              value: "optional:configserver:http://config-server:8888"
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              value: "http://service-discovery:8761/eureka/"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8087
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8087
+            initialDelaySeconds: 30
+            periodSeconds: 10

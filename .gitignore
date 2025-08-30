@@ -13,4 +13,5 @@ terraform.tfstate.backup
 shopcloud-infra/.terraform/
 shopcloud-infra/terraform.tfstate
 shopcloud-infra/terraform.tfstate.backup
+*.hcl
 *.md

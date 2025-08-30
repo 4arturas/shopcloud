@@ -5,6 +5,15 @@ namespace: shopcloud
 resources:
   - base/config-server
   - base/hello-service
+  - base/api-gateway
+  - base/product-service
+  - base/order-service
+  - base/inventory-service
+  - base/user-service
+  - base/notification-service
+  - base/payment-service
+  - base/rating-reviews-service
+  - base/service-discovery
 
 images:
   - name: cloud-config-server
@@ -12,6 +21,33 @@ images:
     newTag: latest
   - name: cloud-hello-service
     newName: $DOCKERHUB_USERNAME/cloud-hello-service
+    newTag: latest
+  - name: cloud-api-gateway
+    newName: $DOCKERHUB_USERNAME/cloud-api-gateway
+    newTag: latest
+  - name: cloud-product-service
+    newName: $DOCKERHUB_USERNAME/cloud-product-service
+    newTag: latest
+  - name: cloud-order-service
+    newName: $DOCKERHUB_USERNAME/cloud-order-service
+    newTag: latest
+  - name: cloud-inventory-service
+    newName: $DOCKERHUB_USERNAME/cloud-inventory-service
+    newTag: latest
+  - name: cloud-user-service
+    newName: $DOCKERHUB_USERNAME/cloud-user-service
+    newTag: latest
+  - name: cloud-notification-service
+    newName: $DOCKERHUB_USERNAME/cloud-notification-service
+    newTag: latest
+  - name: cloud-payment-service
+    newName: $DOCKERHUB_USERNAME/cloud-payment-service
+    newTag: latest
+  - name: cloud-rating-reviews-service
+    newName: $DOCKERHUB_USERNAME/cloud-rating-reviews-service
+    newTag: latest
+  - name: cloud-service-discovery
+    newName: $DOCKERHUB_USERNAME/cloud-service-discovery
     newTag: latest
 
 configMapGenerator:
