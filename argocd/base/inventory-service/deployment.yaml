@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: inventory-service
-          image: arturix/cloud-inventory-service:latest
+          image: arturix/cloud-inventory-service:4a9f906dff5ea74f461d4dbec92c255c2b29f83b
           ports:
             - containerPort: 8083
           env:
