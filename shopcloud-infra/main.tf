@@ -190,7 +190,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
     }
   }
 }
-
+/*
 # Hello World Resources
 resource "kubernetes_deployment" "hello_world" {
   metadata {
@@ -240,7 +240,7 @@ resource "kubernetes_service" "hello_world" {
     type = "NodePort"
   }
 }
-
+*/
 /*resource "kubernetes_ingress_v1" "hello_world_ingress" {
   metadata {
     name = "hello-world-ingress"
