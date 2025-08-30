@@ -8,6 +8,6 @@ spec:
   selector:
     app: payment-service
   ports:
-    - port: 8086
-      targetPort: 8086
+    - port: 8080
+      targetPort: 8080
   type: ClusterIP

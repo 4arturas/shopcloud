@@ -18,7 +18,7 @@ spec:
         - name: config-server
           image: arturix/cloud-config-server:9807201f518c4ebb7708fc20fdc1bf30eb70e036
           ports:
-            - containerPort: 8888
+            - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "native"
@@ -30,13 +30,13 @@ spec:
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8888
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8888
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
       volumes:

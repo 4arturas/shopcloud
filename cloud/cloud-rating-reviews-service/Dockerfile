@@ -1,4 +1,6 @@
 FROM openjdk:21-jdk-slim
 VOLUME /tmp
-COPY ${JAR_FILE} app.jar
+EXPOSE 8080
+COPY target/ /app/target/
+RUN mv /app/target/rating-reviews-service-0.0.1-SNAPSHOT.jar /app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

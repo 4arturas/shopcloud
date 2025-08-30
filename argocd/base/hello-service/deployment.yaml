@@ -21,7 +21,7 @@ spec:
             - containerPort: 8080
           env:
             - name: SPRING_CONFIG_IMPORT
-              value: "optional:configserver:http://config-server:8888"
+              value: "optional:configserver:http://config-server:8080"
             - name: SPRING_PROFILES_ACTIVE
               value: "kubernetes"
           readinessProbe:

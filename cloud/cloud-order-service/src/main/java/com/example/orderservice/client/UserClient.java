@@ -14,6 +14,6 @@ public class UserClient {
     }
 
     public User findById(Long id) {
-        return restTemplate.getForObject("http://user-service:8081/users/{id}", User.class, id);
+        return restTemplate.getForObject("http://user-service:8080/users/{id}", User.class, id);
     }
 }

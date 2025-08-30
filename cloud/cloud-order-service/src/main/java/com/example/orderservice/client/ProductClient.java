@@ -14,6 +14,6 @@ public class ProductClient {
     }
 
     public Product findById(Long id) {
-        return restTemplate.getForObject("http://product-service:8082/products/{id}", Product.class, id);
+        return restTemplate.getForObject("http://product-service:8080/products/{id}", Product.class, id);
     }
 }

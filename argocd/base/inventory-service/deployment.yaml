@@ -18,20 +18,20 @@ spec:
         - name: inventory-service
           image: arturix/cloud-inventory-service:9807201f518c4ebb7708fc20fdc1bf30eb70e036
           ports:
-            - containerPort: 8083
+            - containerPort: 8080
           env:
             - name: SPRING_CONFIG_IMPORT
-              value: "optional:configserver:http://config-server:8888"
+              value: "optional:configserver:http://config-server:8080"
             
           readinessProbe:
             httpGet:
               path: /actuator/health
-              port: 8083
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: 8083
+              port: 8080
             initialDelaySeconds: 30
             periodSeconds: 10

@@ -8,6 +8,6 @@ spec:
   selector:
     app: rating-reviews-service
   ports:
-    - port: 8087
-      targetPort: 8087
+    - port: 8080
+      targetPort: 8080
   type: ClusterIP
