@@ -1,0 +1,68 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: yourname
+      changes:
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: order_date
+                  value: "2025-08-30T10:00:00Z"
+              - column:
+                  name: total_amount
+                  value: 1225.00
+        - insert:
+            tableName: order_items
+            columns:
+              - column:
+                  name: order_id
+                  valueComputed: "(SELECT id FROM orders WHERE order_date = '2025-08-30T10:00:00Z')"
+              - column:
+                  name: product_id
+                  value: 1 # Assuming product with ID 1 exists (Laptop)
+              - column:
+                  name: quantity
+                  value: 1
+              - column:
+                  name: price
+                  value: 1200.00
+        - insert:
+            tableName: order_items
+            columns:
+              - column:
+                  name: order_id
+                  valueComputed: "(SELECT id FROM orders WHERE order_date = '2025-08-30T10:00:00Z')"
+              - column:
+                  name: product_id
+                  value: 2 # Assuming product with ID 2 exists (Mouse)
+              - column:
+                  name: quantity
+                  value: 1
+              - column:
+                  name: price
+                  value: 25.00
+        - insert:
+            tableName: orders
+            columns:
+              - column:
+                  name: order_date
+                  value: "2025-08-30T11:30:00Z"
+              - column:
+                  name: total_amount
+                  value: 75.00
+        - insert:
+            tableName: order_items
+            columns:
+              - column:
+                  name: order_id
+                  valueComputed: "(SELECT id FROM orders WHERE order_date = '2025-08-30T11:30:00Z')"
+              - column:
+                  name: product_id
+                  value: 3 # Assuming product with ID 3 exists (Keyboard)
+              - column:
+                  name: quantity
+                  value: 1
+              - column:
+                  name: price
+                  value: 75.00
