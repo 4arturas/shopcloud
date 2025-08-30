@@ -1,0 +1,41 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: yourname
+      changes:
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Laptop"
+              - column:
+                  name: description
+                  value: "Powerful laptop for work and gaming"
+              - column:
+                  name: price
+                  value: 1200.00
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Mouse"
+              - column:
+                  name: description
+                  value: "Wireless optical mouse"
+              - column:
+                  name: price
+                  value: 25.00
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: "Keyboard"
+              - column:
+                  name: description
+                  value: "Mechanical gaming keyboard"
+              - column:
+                  name: price
+                  value: 75.00
