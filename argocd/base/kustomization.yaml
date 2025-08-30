@@ -2,12 +2,3 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - config-server/deployment.yaml
-  - config-server/service.yaml
-  - config-server/configmap.yaml
-  - hello-service/deployment.yaml
-  - hello-service/service.yaml
-  - hello-service/ingress.yaml
-  - api-gateway/deployment.yaml
-  - api-gateway/service.yaml
-  - api-gateway/ingress.yaml
