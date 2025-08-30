@@ -294,3 +294,14 @@ output "postgres_connection" {
   }
   description = "PostgreSQL connection details"
 }
+
+resource "kubernetes_config_map" "product_service_config" {
+  metadata {
+    name      = "product-service-config"
+    namespace = kubernetes_namespace.test.metadata[0].name
+  }
+
+  data = {
+    "spring.datasource.url" = "jdbc:postgresql://host.docker.internal:5432/shopcloud"
+  }
+}
