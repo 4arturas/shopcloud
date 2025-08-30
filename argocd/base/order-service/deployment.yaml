@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: arturix/cloud-order-service:bd6ada5f042603d8ceb535253caf0c1332f6f982
+          image: arturix/cloud-order-service:e7065a95025df58fab4bf581f4d4b84af8490ade
           ports:
             - containerPort: 8080
           env:
