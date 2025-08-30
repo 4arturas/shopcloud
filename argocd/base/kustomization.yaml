@@ -2,28 +2,57 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+  - config-server
+  - hello-service
+  - api-gateway
+  - product-service
+  - order-service
+  - inventory-service
+  - user-service
+  - notification-service
+  - payment-service
+  - rating-reviews-service
+
+images:
+  - name: cloud-config-server
+    newName: $DOCKERHUB_USERNAME/cloud-config-server
+    newTag: latest
+  - name: cloud-hello-service
+    newName: $DOCKERHUB_USERNAME/cloud-hello-service
+    newTag: latest
+  - name: cloud-api-gateway
+    newName: $DOCKERHUB_USERNAME/cloud-api-gateway
+    newTag: latest
+  - name: cloud-product-service
+    newName: $DOCKERHUB_USERNAME/cloud-product-service
+    newTag: latest
+  - name: cloud-order-service
+    newName: $DOCKERHUB_USERNAME/cloud-order-service
+    newTag: latest
+  - name: cloud-inventory-service
+    newName: $DOCKERHUB_USERNAME/cloud-inventory-service
+    newTag: latest
+  - name: cloud-user-service
+    newName: $DOCKERHUB_USERNAME/cloud-user-service
+    newTag: latest
+  - name: cloud-notification-service
+    newName: $DOCKERHUB_USERNAME/cloud-notification-service
+    newTag: latest
+  - name: cloud-payment-service
+    newName: $DOCKERHUB_USERNAME/cloud-payment-service
+    newTag: latest
+  - name: cloud-rating-reviews-service
+    newName: $DOCKERHUB_USERNAME/cloud-rating-reviews-service
+    newTag: latest
+
+patchesStrategicMerge:
   - config-server/deployment.yaml
-  - config-server/service.yaml
-  - config-server/configmap.yaml
   - hello-service/deployment.yaml
-  - hello-service/service.yaml
-  - hello-service/ingress.yaml
   - api-gateway/deployment.yaml
-  - api-gateway/service.yaml
-  - api-gateway/ingress.yaml
   - product-service/deployment.yaml
-  - product-service/service.yaml
   - order-service/deployment.yaml
-  - order-service/service.yaml
   - inventory-service/deployment.yaml
-  - inventory-service/service.yaml
   - user-service/deployment.yaml
-  - user-service/service.yaml
   - notification-service/deployment.yaml
-  - notification-service/service.yaml
   - payment-service/deployment.yaml
-  - payment-service/service.yaml
   - rating-reviews-service/deployment.yaml
-  - rating-reviews-service/service.yaml
-  - service-discovery/deployment.yaml
-  - service-discovery/service.yaml

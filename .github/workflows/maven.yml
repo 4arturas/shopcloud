@@ -31,7 +31,6 @@ jobs:
           mvn -B package --file cloud/cloud-notification-service/pom.xml
           mvn -B package --file cloud/cloud-payment-service/pom.xml
           mvn -B package --file cloud/cloud-rating-reviews-service/pom.xml
-          mvn -B package --file cloud/cloud-service-discovery/pom.xml
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -112,13 +111,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:${{ github.sha }}
 
-      - name: Build and push service-discovery
-        uses: docker/build-push-action@v6
-        with:
-          context: ./cloud/cloud-service-discovery
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-service-discovery:${{ github.sha }}
-
       - name: Update Kubernetes manifests
         run: |
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:${{ github.sha }}|g" argocd/base/config-server/deployment.yaml
@@ -131,7 +123,6 @@ jobs:
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:${{ github.sha }}|g" argocd/base/notification-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:${{ github.sha }}|g" argocd/base/payment-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:${{ github.sha }}|g" argocd/base/rating-reviews-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-service-discovery:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-service-discovery:${{ github.sha }}|g" argocd/base/service-discovery/deployment.yaml
 
       - name: Commit and push if changed
         run: |
