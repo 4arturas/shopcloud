@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: notification-service
-          image: arturix/cloud-notification-service:4a9f906dff5ea74f461d4dbec92c255c2b29f83b
+          image: arturix/cloud-notification-service:1af730459e7f7359348e42786e1d18b5e21c3035
           ports:
             - containerPort: 8085
           env:
