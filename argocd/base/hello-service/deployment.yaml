@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hello-service
-          image: arturix/cloud-hello-service:388dc8ed01bf324db3ab43683e8acc1487e9cf34
+          image: arturix/cloud-hello-service:d22573da9b20aac65063a52328598a29389aa0aa
           ports:
             - containerPort: 8080
           env:
