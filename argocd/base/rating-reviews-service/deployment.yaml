@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rating-reviews-service
-          image: arturix/cloud-rating-reviews-service:2f61bae0c48f78e43c6fe1302fbbd3fc92afc8d3
+          image: arturix/cloud-rating-reviews-service:6f32f9fbd528e2b778d93e82e5720644b4cad00a
           ports:
             - containerPort: 8087
           env:
