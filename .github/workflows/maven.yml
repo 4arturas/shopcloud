@@ -46,83 +46,83 @@ jobs:
         with:
           context: ./cloud/cloud-config-server
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:latest
 
       - name: Build and push hello-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-hello-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:latest
 
       - name: Build and push api-gateway
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-api-gateway
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-api-gateway:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-api-gateway:latest
 
       - name: Build and push product-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-product-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-product-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-product-service:latest
 
       - name: Build and push order-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-order-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-order-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-order-service:latest
 
       - name: Build and push inventory-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-inventory-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-inventory-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-inventory-service:latest
 
       - name: Build and push user-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-user-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-user-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-user-service:latest
 
       - name: Build and push notification-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-notification-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:latest
 
       - name: Build and push payment-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-payment-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:latest
 
       - name: Build and push rating-reviews-service
         uses: docker/build-push-action@v6
         with:
           context: ./cloud/cloud-rating-reviews-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:latest
 
       - name: Update Kubernetes manifests
         run: |
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:${{ github.sha }}|g" argocd/base/config-server/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:${{ github.sha }}|g" argocd/base/hello-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-api-gateway:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-api-gateway:${{ github.sha }}|g" argocd/base/api-gateway/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-product-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-product-service:${{ github.sha }}|g" argocd/base/product-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-order-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-order-service:${{ github.sha }}|g" argocd/base/order-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-inventory-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-inventory-service:${{ github.sha }}|g" argocd/base/inventory-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-user-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-user-service:${{ github.sha }}|g" argocd/base/user-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:${{ github.sha }}|g" argocd/base/notification-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:${{ github.sha }}|g" argocd/base/payment-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:${{ github.sha }}|g" argocd/base/rating-reviews-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-config-server:latest|g" argocd/base/config-server/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-hello-service:latest|g" argocd/base/hello-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-api-gateway:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-api-gateway:latest|g" argocd/base/api-gateway/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-product-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-product-service:latest|g" argocd/base/product-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-order-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-order-service:latest|g" argocd/base/order-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-inventory-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-inventory-service:latest|g" argocd/base/inventory-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-user-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-user-service:latest|g" argocd/base/user-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-notification-service:latest|g" argocd/base/notification-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-payment-service:latest|g" argocd/base/payment-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/cloud-rating-reviews-service:latest|g" argocd/base/rating-reviews-service/deployment.yaml
 
       - name: Commit and push if changed
         run: |

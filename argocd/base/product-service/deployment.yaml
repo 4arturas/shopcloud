@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: arturix/cloud-product-service:47814b210a4711fd136f159e5563a523fab64949
+          image: arturix/cloud-product-service:latest
           ports:
             - containerPort: 8080
           env:

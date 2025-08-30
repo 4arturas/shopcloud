@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: payment-service
-          image: arturix/cloud-payment-service:47814b210a4711fd136f159e5563a523fab64949
+          image: arturix/cloud-payment-service:latest
           ports:
             - containerPort: 8080
           env:
