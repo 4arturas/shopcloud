@@ -8,3 +8,6 @@ resources:
   - hello-service/deployment.yaml
   - hello-service/service.yaml
   - hello-service/ingress.yaml
+  - api-gateway/deployment.yaml
+  - api-gateway/service.yaml
+  - api-gateway/ingress.yaml

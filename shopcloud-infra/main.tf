@@ -241,7 +241,7 @@ resource "kubernetes_service" "hello_world" {
   }
 }
 
-resource "kubernetes_ingress_v1" "hello_world_ingress" {
+/*resource "kubernetes_ingress_v1" "hello_world_ingress" {
   metadata {
     name = "hello-world-ingress"
     annotations = {
@@ -268,7 +268,7 @@ resource "kubernetes_ingress_v1" "hello_world_ingress" {
       }
     }
   }
-}
+}*/
 
 # Variables
 variable "github_repo_url" {
