@@ -11,8 +11,8 @@ resources:
   #  - kafka/kafka-controller-headless-service.yaml
   #  - kafka/kafka-service.yaml
   #  - kafka/kafka-controller-statefulset.yaml
-  - kafka/kafka-zookeeper.yaml
-  - kafka/kafka.yaml
+#  - kafka/kafka-zookeeper.yaml
+  - kafka/kafka-a.yaml
 
 
 #  - config-server/deployment.yaml
@@ -27,23 +27,23 @@ resources:
 #  - api-gateway/service.yaml
 #  - api-gateway/ingress.yaml
 
-  - product-service/deployment.yaml
-  - product-service/service.yaml
-
-  - order-service/deployment.yaml
-  - order-service/service.yaml
-
-  - inventory-service/deployment.yaml
-  - inventory-service/service.yaml
-
-  - user-service/deployment.yaml
-  - user-service/service.yaml
+#  - user-service/deployment.yaml
+#  - user-service/service.yaml
 
 #  - notification-service/deployment.yaml
 #  - notification-service/service.yaml
 
-  - payment-service/deployment.yaml
-  - payment-service/service.yaml
+  - inventory-service/deployment.yaml
+  - inventory-service/service.yaml
 
-  - rating-reviews-service/deployment.yaml
-  - rating-reviews-service/service.yaml
+#  - product-service/deployment.yaml
+#  - product-service/service.yaml
+#
+#  - order-service/deployment.yaml
+#  - order-service/service.yaml
+#
+#  - payment-service/deployment.yaml
+#  - payment-service/service.yaml
+#
+#  - rating-reviews-service/deployment.yaml
+#  - rating-reviews-service/service.yaml
