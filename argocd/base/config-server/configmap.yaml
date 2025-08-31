@@ -12,3 +12,7 @@ data:
     server:
       port: 8080
     greeting: "Hello from Config Server!"
+  inventory-service.yml: |-
+    spring:
+      kafka:
+        bootstrap-servers: kafka-broker-1:29092,kafka-broker-2:29093
