@@ -6,6 +6,10 @@ resources:
   - kafka/kafka.yaml
   - kafka/kafka-ui-ingress.yaml
 
+  - config-server/deployment.yaml
+  - config-server/service.yaml
+  - config-server/configmap.yaml
+
 #  - hello-service/deployment.yaml
 #  - hello-service/service.yaml
 #  - hello-service/ingress.yaml
