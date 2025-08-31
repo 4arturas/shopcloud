@@ -3,16 +3,7 @@ kind: Kustomization
 
 resources:
 
-  #  - kafka/kafka-serviceaccount.yaml
-  #  - kafka/kafka-user-passwords-secret.yaml
-  #  - kafka/kafka-kraft-cluster-id-secret.yaml
-  #  - kafka/kafka-controller-configuration-configmap.yaml
-  #  - kafka/kafka-scripts-configmap.yaml
-  #  - kafka/kafka-controller-headless-service.yaml
-  #  - kafka/kafka-service.yaml
-  #  - kafka/kafka-controller-statefulset.yaml
-#  - kafka/kafka-zookeeper.yaml
-  - kafka/kafka-a.yaml
+  - kafka/kafka.yaml
 
 
 #  - config-server/deployment.yaml
