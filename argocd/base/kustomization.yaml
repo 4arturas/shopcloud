@@ -12,6 +12,7 @@ resources:
   #  - kafka/kafka-service.yaml
   #  - kafka/kafka-controller-statefulset.yaml
   - kafka/kafka-zookeeper.yaml
+  - kafka/kafka.yaml
 
 
 #  - config-server/deployment.yaml
