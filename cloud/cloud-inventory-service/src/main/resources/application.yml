@@ -17,7 +17,7 @@ server:
   port: 8080
 
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: kafka-broker-1:29092,kafka-broker-2:29093
 
 
 
