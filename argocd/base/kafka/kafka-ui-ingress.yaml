@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: kafka-ui.shopcloud.com
+    - host: kafka-ui.info
       http:
         paths:
           - path: /
