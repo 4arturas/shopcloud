@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 
   - kafka/kafka.yaml
+  - kafka/kafka-ui-ingress.yaml
 
 #  - hello-service/deployment.yaml
 #  - hello-service/service.yaml
