@@ -36,9 +36,9 @@ provider "helm" {
 provider "docker" {}
 
 # Docker Network
-resource "docker_network" "kafka_network" {
+/*resource "docker_network" "kafka_network" {
   name = "kafka_network"
-}
+}*/
 
 # PostgreSQL Resources
 resource "docker_image" "postgres_image" {
@@ -48,9 +48,9 @@ resource "docker_image" "postgres_image" {
 resource "docker_container" "postgres" {
   name  = "postgres"
   image = docker_image.postgres_image.image_id
-  networks_advanced {
+  /*networks_advanced {
     name = docker_network.kafka_network.name
-  }
+  }*/
   ports {
     internal = 5432
     external = 5432
@@ -66,7 +66,7 @@ resource "docker_container" "postgres" {
     host_path      = "/tmp/postgres-data" # You might want to use a proper volume
   }
 }
-
+/*
 # Kafka Resources
 resource "docker_image" "zookeeper_image" {
   name = "confluentinc/cp-zookeeper:latest"
@@ -109,7 +109,7 @@ resource "docker_container" "kafka" {
     "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1"
   ]
   depends_on = [docker_container.zookeeper]
-}
+}*/
 
 # Kubernetes Base Resources
 resource "kubernetes_namespace" "test" {

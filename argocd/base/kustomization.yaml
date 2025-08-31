@@ -5,14 +5,6 @@ resources:
   - config-server/deployment.yaml
   - config-server/service.yaml
   - config-server/configmap.yaml
-  - kafka/kafka-serviceaccount.yaml
-  - kafka/kafka-user-passwords-secret.yaml
-  - kafka/kafka-kraft-cluster-id-secret.yaml
-  - kafka/kafka-controller-configuration-configmap.yaml
-  - kafka/kafka-scripts-configmap.yaml
-  - kafka/kafka-controller-headless-service.yaml
-  - kafka/kafka-service.yaml
-  - kafka/kafka-controller-statefulset.yaml
   - hello-service/deployment.yaml
   - hello-service/service.yaml
   - hello-service/ingress.yaml
@@ -33,3 +25,14 @@ resources:
   - payment-service/service.yaml
   - rating-reviews-service/deployment.yaml
   - rating-reviews-service/service.yaml
+
+
+#  - kafka/kafka-serviceaccount.yaml
+#  - kafka/kafka-user-passwords-secret.yaml
+#  - kafka/kafka-kraft-cluster-id-secret.yaml
+#  - kafka/kafka-controller-configuration-configmap.yaml
+#  - kafka/kafka-scripts-configmap.yaml
+#  - kafka/kafka-controller-headless-service.yaml
+#  - kafka/kafka-service.yaml
+#  - kafka/kafka-controller-statefulset.yaml
+  - kafka/kafka-zookeeper.yaml
