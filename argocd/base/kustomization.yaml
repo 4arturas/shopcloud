@@ -27,14 +27,14 @@ resources:
   - inventory-service/deployment.yaml
   - inventory-service/service.yaml
 
-#  - product-service/deployment.yaml
-#  - product-service/service.yaml
-#
-#  - order-service/deployment.yaml
-#  - order-service/service.yaml
-#
-#  - payment-service/deployment.yaml
-#  - payment-service/service.yaml
-#
-#  - rating-reviews-service/deployment.yaml
-#  - rating-reviews-service/service.yaml
+  - product-service/deployment.yaml
+  - product-service/service.yaml
+
+  - order-service/deployment.yaml
+  - order-service/service.yaml
+
+  - payment-service/deployment.yaml
+  - payment-service/service.yaml
+
+  - rating-reviews-service/deployment.yaml
+  - rating-reviews-service/service.yaml
