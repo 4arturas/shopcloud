@@ -89,10 +89,10 @@ spec:
               value: "1"
           resources:
             requests:
-              memory: "100Mi"
+              memory: "1Gi"
               cpu: "200m"
             limits:
-              memory: "200Mi"
+              memory: "1.5Gi"
               cpu: "300m"
 ---
 apiVersion: v1
@@ -148,10 +148,10 @@ spec:
               value: "2"
           resources:
             requests:
-              memory: "100Mi"
+              memory: "1Gi"
               cpu: "200m"
             limits:
-              memory: "200Mi"
+              memory: "1.5Gi"
               cpu: "300m"
 ---
 apiVersion: v1
@@ -207,10 +207,10 @@ spec:
               value: "kafka"
           resources:
             requests:
-              memory: "100Mi"
+              memory: "500Mi"
               cpu: "100m"
             limits:
-              memory: "150Mi"
+              memory: "750Mi"
               cpu: "150m"
 ---
 apiVersion: v1
