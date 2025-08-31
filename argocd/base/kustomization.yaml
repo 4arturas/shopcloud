@@ -19,8 +19,8 @@ resources:
 #  - notification-service/deployment.yaml
 #  - notification-service/service.yaml
 
-  - inventory-service/deployment.yaml
-  - inventory-service/service.yaml
+#  - inventory-service/deployment.yaml
+#  - inventory-service/service.yaml
 
 #  - product-service/deployment.yaml
 #  - product-service/service.yaml
