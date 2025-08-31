@@ -2,37 +2,47 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - config-server/deployment.yaml
-  - config-server/service.yaml
-  - config-server/configmap.yaml
-  - hello-service/deployment.yaml
-  - hello-service/service.yaml
-  - hello-service/ingress.yaml
+
+  #  - kafka/kafka-serviceaccount.yaml
+  #  - kafka/kafka-user-passwords-secret.yaml
+  #  - kafka/kafka-kraft-cluster-id-secret.yaml
+  #  - kafka/kafka-controller-configuration-configmap.yaml
+  #  - kafka/kafka-scripts-configmap.yaml
+  #  - kafka/kafka-controller-headless-service.yaml
+  #  - kafka/kafka-service.yaml
+  #  - kafka/kafka-controller-statefulset.yaml
+  - kafka/kafka-zookeeper.yaml
+
+
+#  - config-server/deployment.yaml
+#  - config-server/service.yaml
+#  - config-server/configmap.yaml
+
+#  - hello-service/deployment.yaml
+#  - hello-service/service.yaml
+#  - hello-service/ingress.yaml
+
 #  - api-gateway/deployment.yaml
 #  - api-gateway/service.yaml
 #  - api-gateway/ingress.yaml
+
   - product-service/deployment.yaml
   - product-service/service.yaml
+
   - order-service/deployment.yaml
   - order-service/service.yaml
+
   - inventory-service/deployment.yaml
   - inventory-service/service.yaml
+
   - user-service/deployment.yaml
   - user-service/service.yaml
+
 #  - notification-service/deployment.yaml
 #  - notification-service/service.yaml
+
   - payment-service/deployment.yaml
   - payment-service/service.yaml
+
   - rating-reviews-service/deployment.yaml
   - rating-reviews-service/service.yaml
-
-
-#  - kafka/kafka-serviceaccount.yaml
-#  - kafka/kafka-user-passwords-secret.yaml
-#  - kafka/kafka-kraft-cluster-id-secret.yaml
-#  - kafka/kafka-controller-configuration-configmap.yaml
-#  - kafka/kafka-scripts-configmap.yaml
-#  - kafka/kafka-controller-headless-service.yaml
-#  - kafka/kafka-service.yaml
-#  - kafka/kafka-controller-statefulset.yaml
-  - kafka/kafka-zookeeper.yaml
