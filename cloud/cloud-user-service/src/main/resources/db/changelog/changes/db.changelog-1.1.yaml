@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: your-name
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: username, value: "testuser"}
+              - column: {name: email, value: "test@example.com"}
+              - column: {name: password, value: "password"} # In a real application, store hashed passwords!
