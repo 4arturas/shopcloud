@@ -20,3 +20,9 @@ data:
       level:
         org.apache.kafka.clients.consumer: DEBUG
         org.springframework.kafka: DEBUG
+  user-service.yml: |-
+    server:
+      port: 8080
+    logging:
+      level:
+        root: INFO
