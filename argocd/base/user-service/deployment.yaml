@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: arturix/cloud-user-service:latest
+          image: arturix/cloud-user-service:2671bcc
           ports:
             - containerPort: 8080
           env:
