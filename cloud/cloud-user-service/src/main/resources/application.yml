@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: user-service
+  config:
+    import: "optional:configserver:http://config-server:8080"
+  datasource:
+    url: jdbc:postgresql://host.docker.internal:5432/shopcloud
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+server:
+  port: 8080
+
+  kafka:
+    bootstrap-servers: kafka-broker-1:29092,kafka-broker-2:29093
