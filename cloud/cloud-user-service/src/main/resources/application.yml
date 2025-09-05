@@ -10,11 +10,8 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: none # Liquibase will manage schema
+      ddl-auto: create-drop # Liquibase will manage schema
     show-sql: true
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
 
 server:
   port: 8080
