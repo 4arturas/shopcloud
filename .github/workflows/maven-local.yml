@@ -1,0 +1,117 @@
+name: Java CI with Docker Local
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: |
+          mvn -B package --file cloud/config-server/pom.xml
+          mvn -B package --file cloud/hello-service/pom.xml
+          mvn -B package --file cloud/api-gateway/pom.xml
+          mvn -B package --file cloud/product-service/pom.xml
+          mvn -B package --file cloud/order-service/pom.xml
+          mvn -B package --file cloud/inventory-service/pom.xml
+          mvn -B package --file cloud/user-service/pom.xml
+          mvn -B package --file cloud/notification-service/pom.xml
+          mvn -B package --file cloud/payment-service/pom.xml
+          mvn -B package --file cloud/rating-reviews-service/pom.xml
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push config-server
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/config-server
+          push: true
+          tags: localhost:5000/config-server:latest
+
+      - name: Build and push hello-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/hello-service
+          push: true
+          tags: localhost:5000/hello-service:latest
+
+      - name: Build and push api-gateway
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/api-gateway
+          push: true
+          tags: localhost:5000/api-gateway:latest
+
+      - name: Build and push product-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/product-service
+          push: true
+          tags: localhost:5000/product-service:latest
+
+      - name: Build and push order-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/order-service
+          push: true
+          tags: localhost:5000/order-service:latest
+
+      - name: Build and push inventory-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/inventory-service
+          push: true
+          tags: localhost:5000/inventory-service:latest
+
+      - name: Build and push user-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/user-service
+          push: true
+          tags: localhost:5000/user-service:latest
+
+      - name: Build and push notification-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/notification-service
+          push: true
+          tags: localhost:5000/notification-service:latest
+
+      - name: Build and push payment-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/payment-service
+          push: true
+          tags: localhost:5000/payment-service:latest
+
+      - name: Build and push rating-reviews-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/rating-reviews-service
+          push: true
+          tags: localhost:5000/rating-reviews-service:latest
+
+      - name: Build and push ui-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/ui-service
+          push: true
+          tags: localhost:5000/ui-service:latest
+
+      - name: Build and push node-red
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/node-red
+          push: true
+          tags: localhost:5000/node-red:latest
