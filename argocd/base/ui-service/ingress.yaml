@@ -5,10 +5,12 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx # Assuming you have an Nginx Ingress Controller
   rules:
-    - http:
+    - host: e-shop.info # Add the host
+      http:
         paths:
-          - path: /ui
+          - path: / # Change path to root
             pathType: Prefix
             backend:
               service:
