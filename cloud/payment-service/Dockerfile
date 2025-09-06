@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn clean install -DskipTests
 
 # Package stage
-FROM gcr.io/distroless/java21-debian11:nonroot
+FROM gcr.io/distroless/java21-debian12:nonroot
 WORKDIR /app
 COPY --from=build /app/target/payment-service-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
