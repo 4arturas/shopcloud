@@ -38,3 +38,7 @@ resources:
 
   - rating-reviews-service/deployment.yaml
   - rating-reviews-service/service.yaml
+
+  - ui-service/deployment.yaml
+  - ui-service/service.yaml
+  - ui-service/ingress.yaml
