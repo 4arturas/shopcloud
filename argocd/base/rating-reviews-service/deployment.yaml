@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: rating-reviews-service
-          image: DOCKERHUB_USERNAME/rating-reviews-service:latest
+          image: arturix/rating-reviews-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
