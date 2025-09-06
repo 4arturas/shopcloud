@@ -28,6 +28,46 @@ spring:
               predicates:
                 - Path=/api/inventory/**
 
+springdoc:
+  swagger-ui:
+    urls:
+      - name: User Service
+        url: /v3/api-docs/user-service
+      - name: Product Service
+        url: /v3/api-docs/product-service
+      - name: Order Service
+        url: /v3/api-docs/order-service
+      - name: Inventory Service
+        url: /v3/api-docs/inventory-service
+      - name: Hello Service
+        url: /v3/api-docs/hello-service
+      - name: Notification Service
+        url: /v3/api-docs/notification-service
+      - name: Payment Service
+        url: /v3/api-docs/payment-service
+      - name: Rating Reviews Service
+        url: /v3/api-docs/rating-reviews-service
+  api-docs:
+    groups:
+      enabled: true
+    paths:
+      - group: user-service
+        paths: /api/users/**
+      - group: product-service
+        paths: /api/products/**
+      - group: order-service
+        paths: /api/orders/**
+      - group: inventory-service
+        paths: /api/inventory/**
+      - group: hello-service
+        paths: /api/hello/**
+      - group: notification-service
+        paths: /api/notifications/**
+      - group: payment-service
+        paths: /api/payments/**
+      - group: rating-reviews-service
+        paths: /api/ratings/**
+
 server:
   port: 8080
 
