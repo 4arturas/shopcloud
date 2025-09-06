@@ -42,3 +42,8 @@ resources:
   - ui-service/deployment.yaml
   - ui-service/service.yaml
   - ui-service/ingress.yaml
+
+  - node-red/deployment.yaml
+  - node-red/service.yaml
+  - node-red/ingress.yaml
+  - node-red/pvc.yaml

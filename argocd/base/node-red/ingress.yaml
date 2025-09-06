@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nodered-ingress
+  labels:
+    app: nodered
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx # Assuming you have an Nginx Ingress Controller
+  rules:
+    - host: nodered.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nodered-service
+                port:
+                  number: 1880
