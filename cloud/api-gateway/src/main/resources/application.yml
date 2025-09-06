@@ -51,12 +51,6 @@ spring:
                 - Path=/v3/api-docs/inventory-service
               filters:
                 - RewritePath=/v3/api-docs/inventory-service, /v3/api-docs
-            - id: hello-service-api-docs
-              uri: lb://hello-service
-              predicates:
-                - Path=/v3/api-docs/hello-service
-              filters:
-                - RewritePath=/v3/api-docs/hello-service, /v3/api-docs
             - id: notification-service-api-docs
               uri: lb://notification-service
               predicates:
@@ -87,8 +81,6 @@ springdoc:
         url: /v3/api-docs/order-service
       - name: Inventory Service
         url: /v3/api-docs/inventory-service
-      - name: Hello Service
-        url: /v3/api-docs/hello-service
       - name: Notification Service
         url: /v3/api-docs/notification-service
       - name: Payment Service
