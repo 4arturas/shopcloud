@@ -113,6 +113,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:latest
 
+      - name: Build and push ui-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/ui-service
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest
+
       
 
       - name: Update Kubernetes manifests
