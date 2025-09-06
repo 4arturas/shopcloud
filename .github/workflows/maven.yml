@@ -120,6 +120,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest
 
+      - name: Build and push ui-service
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/ui-service
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest
+
       - name: Update Kubernetes manifests
         run: |
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/config-server:latest|g" argocd/base/config-server/deployment.yaml
@@ -132,6 +139,7 @@ jobs:
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/notification-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/notification-service:latest|g" argocd/base/notification-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:latest|g" argocd/base/payment-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:latest|g" argocd/base/rating-reviews-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest|g" argocd/base/ui-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest|g" argocd/base/ui-service/deployment.yaml
 
       - name: Commit and push if changed

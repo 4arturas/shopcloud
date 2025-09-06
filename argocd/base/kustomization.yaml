@@ -42,3 +42,7 @@ resources:
   - ui-service/deployment.yaml
   - ui-service/service.yaml
   - ui-service/ingress.yaml
+
+  - ui-service/deployment.yaml
+  - ui-service/service.yaml
+  - ui-service/ingress.yaml
