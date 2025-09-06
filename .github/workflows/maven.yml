@@ -131,18 +131,18 @@ jobs:
 
       - name: Update Kubernetes manifests
         run: |
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/config-server:latest|g" argocd/base/config-server/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/hello-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/hello-service:latest|g" argocd/base/hello-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:latest|g" argocd/base/api-gateway/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:latest|g" argocd/base/product-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/order-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/order-service:latest|g" argocd/base/order-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/inventory-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/inventory-service:latest|g" argocd/base/inventory-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/user-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/user-service:latest|g" argocd/base/user-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/notification-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/notification-service:latest|g" argocd/base/notification-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:latest|g" argocd/base/payment-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:latest|g" argocd/base/rating-reviews-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest|g" argocd/base/ui-service/deployment.yaml
-          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/node-red:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/node-red:latest|g" argocd/base/node-red/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/config-server:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/config-server:latest|g" argocd/base/config-server/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/hello-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/hello-service:latest|g" argocd/base/hello-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/api-gateway:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/api-gateway:latest|g" argocd/base/api-gateway/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/product-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/product-service:latest|g" argocd/base/product-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/order-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/order-service:latest|g" argocd/base/order-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/inventory-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/inventory-service:latest|g" argocd/base/inventory-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/user-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/user-service:latest|g" argocd/base/user-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/notification-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/notification-service:latest|g" argocd/base/notification-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:latest|g" argocd/base/payment-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:latest|g" argocd/base/rating-reviews-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/ui-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest|g" argocd/base/ui-service/deployment.yaml
+          sed -i "s|image: DOCKERHUB_USERNAME/node-red:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/node-red:latest|g" argocd/base/node-red/deployment.yaml
 
       - name: Commit and push if changed
         run: |

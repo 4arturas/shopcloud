@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: inventory-service
-          image: arturix/inventory-service:latest
+          image: DOCKERHUB_USERNAME/inventory-service:latest
           ports:
             - containerPort: 8080
           env:

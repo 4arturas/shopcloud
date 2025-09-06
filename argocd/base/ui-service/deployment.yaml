@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
         - name: ui-service
-          image: arturix/ui-service:latest
+          image: DOCKERHUB_USERNAME/ui-service:latest
           ports:
             - containerPort: 80
