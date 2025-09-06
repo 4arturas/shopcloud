@@ -120,6 +120,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest
 
+      - name: Build and push node-red
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/node-red
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/node-red:latest
+
       
 
       - name: Update Kubernetes manifests
@@ -135,6 +142,7 @@ jobs:
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/payment-service:latest|g" argocd/base/payment-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/rating-reviews-service:latest|g" argocd/base/rating-reviews-service/deployment.yaml
           sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/ui-service:latest|g" argocd/base/ui-service/deployment.yaml
+          sed -i "s|image: ${{ secrets.DOCKERHUB_USERNAME }}/node-red:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/node-red:latest|g" argocd/base/node-red/deployment.yaml
 
       - name: Commit and push if changed
         run: |
