@@ -26,6 +26,7 @@ resources:
 
   - inventory-service/deployment.yaml
   - inventory-service/service.yaml
+  - inventory-service/ingress.yaml
 
   - product-service/deployment.yaml
   - product-service/service.yaml
