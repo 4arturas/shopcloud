@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: nodered
-        image: DOCKERHUB_USERNAME/node-red:latest
+        image: arturix/node-red:latest
         ports:
         - containerPort: 1880
         volumeMounts:

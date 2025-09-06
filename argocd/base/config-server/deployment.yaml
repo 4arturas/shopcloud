@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: config-server
-          image: DOCKERHUB_USERNAME/config-server:latest
+          image: arturix/config-server:latest
           ports:
             - containerPort: 8080
           env:

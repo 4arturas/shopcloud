@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: DOCKERHUB_USERNAME/user-service:latest
+          image: arturix/user-service:latest
           ports:
             - containerPort: 8080
           env:
