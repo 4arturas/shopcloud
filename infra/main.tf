@@ -147,7 +147,8 @@ resource "helm_release" "argocd" {
 
   set {
     name  = "configs.secret.argocdServerAdminPassword"
-    value = "admin"
+    # admin
+    value = "$2a$12$lMd1/TIfr86f4fQnE.rgKuBdcxEf9ZwwoJsjMavbRxoX4YxZrwLu6"
   }
 }
 
