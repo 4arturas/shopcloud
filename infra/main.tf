@@ -144,6 +144,11 @@ resource "helm_release" "argocd" {
     name  = "server.extraArgs"
     value = "{--insecure}"
   }
+
+  set {
+    name  = "configs.secret.argocdServerAdminPassword"
+    value = "admin"
+  }
 }
 
 resource "null_resource" "crd_wait" {

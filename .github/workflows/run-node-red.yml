@@ -1,0 +1,27 @@
+name: Run Node-RED Locally
+
+on: [workflow_dispatch] # Allows manual triggering for local testing
+
+jobs:
+  run_node_red:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Node-RED Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./cloud/node-red
+          tags: node-red-local:latest
+          load: true # Load image into Docker daemon for immediate use
+
+      - name: Run Node-RED container
+        run: |
+          docker run -d -p 1880:1880 --name node-red-instance node-red-local:latest
+          echo "Node-RED is running on http://localhost:1880"
+          echo "To stop the container, run: docker stop node-red-instance"
+          echo "To remove the container, run: docker rm node-red-instance"

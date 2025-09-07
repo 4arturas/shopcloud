@@ -1,0 +1,8 @@
+name: CI
+on: release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'on release'

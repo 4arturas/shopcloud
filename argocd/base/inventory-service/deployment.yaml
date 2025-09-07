@@ -24,6 +24,8 @@ spec:
           env:
             - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
               value: "kafka-broker-1:29092,kafka-broker-2:29093"
+            - name: SPRING_CONFIG_IMPORT
+              value: "optional:configserver:http://config-server:8080"
           
             
           readinessProbe:

@@ -10,8 +10,8 @@ ERRORS.md
 terraform.tfstate
 terraform.tfstate.backup
 .terraform/
-shopcloud-infra/.terraform/
-shopcloud-infra/terraform.tfstate
-shopcloud-infra/terraform.tfstate.backup
+infra/.terraform/
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
 *.hcl
 *.md
