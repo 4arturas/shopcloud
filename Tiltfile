@@ -6,14 +6,9 @@
 # https://docs.tilt.dev/api.html#api.version_settings
 version_settings(constraint='>=0.22.2')
 
-# --- Configuration ---
-# Set the Docker registry to use. For local development, you might use 'kind-registry:5000'
-# if you have a local Kind cluster with a registry, or leave it empty for Docker Desktop.
-# If you are pushing to a remote registry, specify it here.
-
-from tilt import TriggerMode
-
 REGISTRY = "" # Default for Docker Desktop or if not using a local registry
+
+
 
 # --- Tilt Demo Service (Node.js Express) ---
 docker_build(
@@ -73,7 +68,7 @@ local_resource(
     cmd='mvn clean install -DskipTests',
     dir='cloud/config-server',
     deps=['cloud/config-server/pom.xml', 'cloud/config-server/src'],
-    trigger_mode=TriggerMode.AUTO,
+    trigger_mode=TRIGGER_MODE_AUTO,
 )
 
 docker_build(
