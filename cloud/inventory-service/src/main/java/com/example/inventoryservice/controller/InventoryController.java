@@ -1,20 +1,22 @@
 package com.example.inventoryservice.controller;
 
+import com.example.inventoryservice.entity.Inventory;
 import com.example.inventoryservice.service.InventoryService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/inventory")
-@RequiredArgsConstructor
+@RequestMapping("/inventory")
 public class InventoryController {
 
-    private final InventoryService inventoryService;
+    @Autowired
+    private InventoryService inventoryService;
 
-    @GetMapping("/{skuCode}")
-    @ResponseStatus(HttpStatus.OK)
-    public boolean isInStock(@PathVariable String skuCode) {
-        return inventoryService.isInStock(skuCode);
+    @GetMapping("/{productId}")
+    public Inventory getInventoryByProductId(@PathVariable Long productId) {
+        return inventoryService.getInventoryByProductId(productId);
     }
 }
