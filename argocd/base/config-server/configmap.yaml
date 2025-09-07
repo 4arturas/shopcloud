@@ -16,8 +16,8 @@ data:
     spring:
       datasource:
         url: jdbc:postgresql://host.docker.internal:5432/shopcloud
-        username: shopcloud
-        password: shopcloud
+        username: postgres
+        password: postgres
         driver-class-name: org.postgresql.Driver
       jpa:
         hibernate:
