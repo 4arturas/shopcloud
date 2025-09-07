@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - include: 
-      file: changes/001-create-inventory-table.yaml
-      relativeToChangelogFile: true
-  - include: 
-      file: changes/002-insert-inventory-data.yaml
-      relativeToChangelogFile: true
