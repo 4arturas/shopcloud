@@ -48,9 +48,6 @@ resources:
   - node-red/service.yaml
   - node-red/ingress.yaml
   - node-red/pvc.yaml
-
-  - postgres/deployment.yaml
-  - postgres/service.yaml
 #
 #images:
 #  - name: arturix/config-server
