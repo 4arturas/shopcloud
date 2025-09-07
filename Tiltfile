@@ -8,6 +8,9 @@ version_settings(constraint='>=0.22.2')
 
 REGISTRY = "" # Default for Docker Desktop or if not using a local registry
 
+# Set default namespace for all Kubernetes resources deployed by Tilt
+default_namespace('shopcloud')
+
 # --- Tilt Demo Service (Node.js Express) ---
 docker_build(
     'arturix/tilt-demo', # Image name for the demo app
@@ -165,6 +168,175 @@ k8s_resource(
     'inventory-service',
     port_forwards='8080:8080', # Map local port 8080 to container port 8080
 )
+
+# --- Notification Service ---
+local_resource(
+    'notification-service-build',
+    cmd='mvn clean install -DskipTests',
+    dir='cloud/notification-service',
+    deps=['cloud/notification-service/pom.xml', 'cloud/notification-service/src'],
+    trigger_mode=TRIGGER_MODE_AUTO,
+)
+
+docker_build(
+    'arturix/notification-service', # Image name for Notification Service
+    context='cloud/notification-service',
+    dockerfile='cloud/notification-service/Dockerfile',
+    live_update=[
+        sync('cloud/notification-service/target/notification-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
+        # For Java apps, a full restart is often needed for changes to take effect.
+        # You might add: run('kill 1') here to force a restart.
+    ],
+    # If you have a local registry, uncomment the next line:
+    # registry=REGISTRY,
+)
+
+k8s_yaml([
+    'argocd/base/notification-service/deployment.yaml',
+    'argocd/base/notification-service/service.yaml',
+])
+
+k8s_resource(
+    'notification-service',
+    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+)
+
+# --- Order Service ---
+local_resource(
+    'order-service-build',
+    cmd='mvn clean install -DskipTests',
+    dir='cloud/order-service',
+    deps=['cloud/order-service/pom.xml', 'cloud/order-service/src'],
+    trigger_mode=TRIGGER_MODE_AUTO,
+)
+
+docker_build(
+    'arturix/order-service', # Image name for Order Service
+    context='cloud/order-service',
+    dockerfile='cloud/order-service/Dockerfile',
+    live_update=[
+        sync('cloud/order-service/target/order-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
+        # For Java apps, a full restart is often needed for changes to take effect.
+        # You might add: run('kill 1') here to force a restart.
+    ],
+    # If you have a local registry, uncomment the next line:
+    # registry=REGISTRY,
+)
+
+k8s_yaml([
+    'argocd/base/order-service/deployment.yaml',
+    'argocd/base/order-service/service.yaml',
+])
+
+k8s_resource(
+    'order-service',
+    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+)
+
+# --- Payment Service ---
+local_resource(
+    'payment-service-build',
+    cmd='mvn clean install -DskipTests',
+    dir='cloud/payment-service',
+    deps=['cloud/payment-service/pom.xml', 'cloud/payment-service/src'],
+    trigger_mode=TRIGGER_MODE_AUTO,
+)
+
+docker_build(
+    'arturix/payment-service', # Image name for Payment Service
+    context='cloud/payment-service',
+    dockerfile='cloud/payment-service/Dockerfile',
+    live_update=[
+        sync('cloud/payment-service/target/payment-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
+        # For Java apps, a full restart is often needed for changes to take effect.
+        # You might add: run('kill 1') here to force a restart.
+    ],
+    # If you have a local registry, uncomment the next line:
+    # registry=REGISTRY,
+)
+
+k8s_yaml([
+    'argocd/base/payment-service/deployment.yaml',
+    'argocd/base/payment-service/service.yaml',
+])
+
+k8s_resource(
+    'payment-service',
+    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+)
+
+# --- Product Service ---
+local_resource(
+    'product-service-build',
+    cmd='mvn clean install -DskipTests',
+    dir='cloud/product-service',
+    deps=['cloud/product-service/pom.xml', 'cloud/product-service/src'],
+    trigger_mode=TRIGGER_MODE_AUTO,
+)
+
+docker_build(
+    'arturix/product-service', # Image name for Product Service
+    context='cloud/product-service',
+    dockerfile='cloud/product-service/Dockerfile',
+    live_update=[
+        sync('cloud/product-service/target/product-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
+        # For Java apps, a full restart is often needed for changes to take effect.
+        # You might add: run('kill 1') here to force a restart.
+    ],
+    # If you have a local registry, uncomment the next line:
+    # registry=REGISTRY,
+)
+
+k8s_yaml([
+    'argocd/base/product-service/deployment.yaml',
+    'argocd/base/product-service/service.yaml',
+])
+
+k8s_resource(
+    'product-service',
+    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+)
+
+# --- User Service ---
+local_resource(
+    'user-service-build',
+    cmd='mvn clean install -DskipTests',
+    dir='cloud/user-service',
+    deps=['cloud/user-service/pom.xml', 'cloud/user-service/src'],
+    trigger_mode=TRIGGER_MODE_AUTO,
+)
+
+docker_build(
+    'arturix/user-service', # Image name for User Service
+    context='cloud/user-service',
+    dockerfile='cloud/user-service/Dockerfile',
+    live_update=[
+        sync('cloud/user-service/target/user-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
+        # For Java apps, a full restart is often needed for changes to take effect.
+        # You might add: run('kill 1') here to force a restart.
+    ],
+    # If you have a local registry, uncomment the next line:
+    # registry=REGISTRY,
+)
+
+k8s_yaml([
+    'argocd/base/user-service/deployment.yaml',
+    'argocd/base/user-service/service.yaml',
+])
+
+k8s_resource(
+    'user-service',
+    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+)
+
+# --- Kafka Components ---
+k8s_yaml('argocd/base/kafka/kafka.yaml')
+k8s_yaml('argocd/base/kafka/kafka-ui-ingress.yaml')
+
+k8s_resource('zookeeper-1', port_forwards='2181:2181')
+k8s_resource('kafka-broker-1', port_forwards='9092:9092')
+k8s_resource('kafka-broker-2', port_forwards='9093:9093')
+k8s_resource('kafka-ui', port_forwards='8082:8082')
 
 # --- General Tilt Settings ---
 
