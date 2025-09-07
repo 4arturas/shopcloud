@@ -14,6 +14,15 @@ data:
     greeting: "Hello from Config Server!"
   inventory-service.yml: |-
     spring:
+      datasource:
+        url: jdbc:postgresql://host.docker.internal:5432/shopcloud
+        username: shopcloud
+        password: shopcloud
+        driver-class-name: org.postgresql.Driver
+      jpa:
+        hibernate:
+          ddl-auto: update
+        show-sql: true
       kafka:
         bootstrap-servers: kafka-broker-1:29092,kafka-broker-2:29093
     logging:
