@@ -16,3 +16,5 @@ infra/terraform.tfstate.backup
 infra/.terraform.tfstate.lock.info
 *.hcl
 *.md
+dist
+node_modules
