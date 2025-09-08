@@ -5,3 +5,82 @@ resources:
 
   - kafka/kafka.yaml
   - kafka/kafka-ui-ingress.yaml
+
+  - config-server/deployment.yaml
+  - config-server/service.yaml
+  - config-server/configmap.yaml
+
+#  - hello-service/deployment.yaml
+#  - hello-service/service.yaml
+#  - hello-service/ingress.yaml
+
+  - api-gateway/deployment.yaml
+  - api-gateway/service.yaml
+  - api-gateway/ingress.yaml
+
+  - user-service/deployment.yaml
+  - user-service/service.yaml
+
+  - notification-service/deployment.yaml
+  - notification-service/service.yaml
+
+  - inventory-service/deployment.yaml
+  - inventory-service/service.yaml
+  - inventory-service/ingress.yaml
+
+  - product-service/deployment.yaml
+  - product-service/service.yaml
+
+  - order-service/deployment.yaml
+  - order-service/service.yaml
+
+  - payment-service/deployment.yaml
+  - payment-service/service.yaml
+
+  - rating-reviews-service/deployment.yaml
+  - rating-reviews-service/service.yaml
+
+  - ui-service/deployment.yaml
+  - ui-service/service.yaml
+  - ui-service/ingress.yaml
+
+  - node-red/deployment.yaml
+  - node-red/service.yaml
+  - node-red/ingress.yaml
+  - node-red/pvc.yaml
+  -
+#
+#images:
+#  - name: arturix/config-server
+#    newName: localhost:5000/config-server
+#    newTag: latest
+#  - name: arturix/api-gateway
+#    newName: localhost:5000/api-gateway
+#    newTag: latest
+#  - name: arturix/user-service
+#    newName: localhost:5000/user-service
+#    newTag: latest
+#  - name: arturix/notification-service
+#    newName: localhost:5000/notification-service
+#    newTag: latest
+#  - name: arturix/inventory-service
+#    newName: localhost:5000/inventory-service
+#    newTag: latest
+#  - name: arturix/product-service
+#    newName: localhost:5000/product-service
+#    newTag: latest
+#  - name: arturix/order-service
+#    newName: localhost:5000/order-service
+#    newTag: latest
+#  - name: arturix/payment-service
+#    newName: localhost:5000/payment-service
+#    newTag: latest
+#  - name: arturix/rating-reviews-service
+#    newName: localhost:5000/rating-reviews-service
+#    newTag: latest
+#  - name: arturix/ui-service
+#    newName: localhost:5000/ui-service
+#    newTag: latest
+#  - name: arturix/node-red
+#    newName: localhost:5000/node-red
+#    newTag: latest

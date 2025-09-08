@@ -9,7 +9,7 @@ version_settings(constraint='>=0.22.2')
 REGISTRY = "" # Default for Docker Desktop or if not using a local registry
 
 # Set default namespace for all Kubernetes resources deployed by Tilt
-default_namespace('shopcloud')
+default_namespace = 'shopcloud'
 
 # --- Tilt Demo Service (Node.js Express) ---
 docker_build(
@@ -336,7 +336,7 @@ k8s_yaml('argocd/base/kafka/kafka-ui-ingress.yaml')
 k8s_resource('zookeeper-1', port_forwards='2181:2181')
 k8s_resource('kafka-broker-1', port_forwards='9092:9092')
 k8s_resource('kafka-broker-2', port_forwards='9093:9093')
-k8s_resource('kafka-ui', port_forwards='8082:8082')
+k8s_resource('kafka-monitoring-ui', port_forwards='8082:8082')
 
 # --- General Tilt Settings ---
 
