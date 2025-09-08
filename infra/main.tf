@@ -196,6 +196,45 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
     }
   }
 }
+
+resource "helm_release" "skooner" {
+  name       = "skooner"
+  repository = "https://charts.christianhuth.de"
+  chart      = "skooner"
+  namespace  = "shopcloud"
+  depends_on = [kubernetes_namespace.test]
+}
+
+resource "kubernetes_ingress_v1" "skooner_ingress" {
+  metadata {
+    name      = "skooner-ingress"
+    namespace = "shopcloud"
+    annotations = {
+      "nginx.ingress.kubernetes.io/rewrite-target" = "/"
+    }
+  }
+  spec {
+    ingress_class_name = "nginx"
+    rule {
+      host = "I "
+      http {
+        path {
+          path = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "skooner"
+              port {
+                number = 80
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /*
 # Hello World Resources
 resource "kubernetes_deployment" "hello_world" {
