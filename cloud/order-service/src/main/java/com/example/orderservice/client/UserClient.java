@@ -1,19 +1,24 @@
 package com.example.orderservice.client;
 
 import com.example.orderservice.dto.User;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Component
-public class UserClient {
+@FeignClient(name = "user-service", path = "/users")
+public interface UserClient {
 
-    private final RestTemplate restTemplate;
+    @GetMapping("/{id}")
+    @CircuitBreaker(name = "userService", fallbackMethod = "fallbackForUserService")
+    @Retry(name = "userService")
+    User findById(@PathVariable("id") Long id);
 
-    public UserClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    public User findById(Long id) {
-        return restTemplate.getForObject("http://user-service:8080/users/{id}", User.class, id);
+    default User fallbackForUserService(Long id, Throwable throwable) {
+        // Log the exception
+        System.err.println("Fallback for UserService.findById(" + id + ") executed: " + throwable.getMessage());
+        // Return a default or empty user
+        return new User(id, "Fallback User", "fallback@example.com");
     }
 }

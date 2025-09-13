@@ -22,8 +22,8 @@ public class UserController {
         return userService.findByUsername(username);
     }
 
-    @PostMapping("/register")
+    @PostMapping
     public User register(@RequestBody User user) {
-        return userService.register(user);
+        return userService.save(user);
     }
 }

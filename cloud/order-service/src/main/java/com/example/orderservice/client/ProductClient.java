@@ -1,19 +1,24 @@
 package com.example.orderservice.client;
 
 import com.example.orderservice.dto.Product;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Component
-public class ProductClient {
+@FeignClient(name = "product-service", path = "/products")
+public interface ProductClient {
 
-    private final RestTemplate restTemplate;
+    @GetMapping("/{id}")
+    @CircuitBreaker(name = "productService", fallbackMethod = "fallbackForProductService")
+    @Retry(name = "productService")
+    Product findById(@PathVariable("id") Long id);
 
-    public ProductClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    public Product findById(Long id) {
-        return restTemplate.getForObject("http://product-service:8080/products/{id}", Product.class, id);
+    default Product fallbackForProductService(Long id, Throwable throwable) {
+        // Log the exception
+        System.err.println("Fallback for ProductService.findById(" + id + ") executed: " + throwable.getMessage());
+        // Return a default or empty product
+        return new Product(id, "Fallback Product", "Fallback Description", 0.0);
     }
 }

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -82,18 +80,7 @@ services:
       SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: file:/config
     volumes:
       - ./config-repo:/config
-
-  config-server:
-    build:
-      context: ./cloud/config-server
-      dockerfile: Dockerfile
-    ports:
-      - "8888:8888"
-    environment:
-      SPRING_PROFILES_ACTIVE: native
-      SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: file:/config
-    volumes:
-      - ./config-repo:/config
+    restart: on-failure
 
   api-gateway:
     build:
@@ -105,6 +92,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - config-server
+    restart: on-failure
 
   user-service:
     build:
@@ -117,6 +105,7 @@ services:
     depends_on:
       - config-server
       - postgres
+    restart: on-failure
 
   product-service:
     build:
@@ -129,6 +118,7 @@ services:
     depends_on:
       - config-server
       - postgres
+    restart: on-failure
 
   order-service:
     build:
@@ -142,6 +132,7 @@ services:
       - config-server
       - postgres
       - kafka
+    restart: on-failure
 
   inventory-service:
     build:
@@ -154,6 +145,7 @@ services:
     depends_on:
       - config-server
       - postgres
+    restart: on-failure
 
   payment-service:
     build:
@@ -166,6 +158,7 @@ services:
     depends_on:
       - config-server
       - postgres
+    restart: on-failure
 
   notification-service:
     build:
@@ -178,6 +171,7 @@ services:
     depends_on:
       - config-server
       - kafka
+    restart: on-failure
 
   rating-reviews-service:
     build:
@@ -190,6 +184,7 @@ services:
     depends_on:
       - config-server
       - postgres
+    restart: on-failure
 
   hello-service:
     build:
@@ -201,7 +196,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - config-server
+    restart: on-failure
 
 volumes:
   postgres_data:
-
