@@ -18,3 +18,4 @@ infra/.terraform.tfstate.lock.info
 *.md
 dist
 node_modules
+.env
