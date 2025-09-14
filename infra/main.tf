@@ -197,6 +197,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   }
 }
 
+/*
 resource "helm_release" "skooner" {
   name       = "skooner"
   repository = "https://charts.christianhuth.de"
@@ -234,6 +235,8 @@ resource "kubernetes_ingress_v1" "skooner_ingress" {
     }
   }
 }
+*/
+
 
 /*
 # Hello World Resources

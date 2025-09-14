@@ -2,6 +2,7 @@ spring:
   kafka:
     consumer:
       group-id: inventory-group
+    bootstrap-servers: kafka-broker-1:29092,kafka-broker-2:29093
   application:
     name: inventory-service
   config:

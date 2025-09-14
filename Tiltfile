@@ -109,18 +109,6 @@ docker_build(
     'arturix/ui-service', # This tag should match the image in argocd/base/ui-service/deployment.yaml
     context='cloud/ui-service',
     dockerfile='cloud/ui-service/Dockerfile',
-    target='build-stage', # Use the build-stage for development to get Node.js environment
-    live_update=[
-        fall_back_on('cloud/ui-service/vite.config.ts'), # Full rebuild if Vite config changes
-        sync('cloud/ui-service/', '/app/'), # Sync entire source directory
-        run(
-            'npm install',
-            trigger=['cloud/ui-service/package.json', 'cloud/ui-service/package-lock.json']
-        ),
-        run(
-            'npm run dev', # Start the Vite dev server
-        ),
-    ],
     # If you have a local registry, uncomment the next line:
     # registry=REGISTRY,
 )
@@ -133,7 +121,7 @@ k8s_yaml([
 
 k8s_resource(
     'ui-service',
-    port_forwards='5173:5173', # Map local port 5173 to container port 5173 (Vite dev server default)
+    port_forwards='5173:80', # Map local port 5173 to container port 80 (Nginx default)
 )
 
 # --- Inventory Service ---
@@ -151,8 +139,7 @@ docker_build(
     dockerfile='cloud/inventory-service/Dockerfile',
     live_update=[
         sync('cloud/inventory-service/target/inventory-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
-        # For Java apps, a full restart is often needed for changes to take effect.
-        # You might add: run('kill 1') here to force a restart.
+        run('kill 1'), # Force restart to pick up config changes
     ],
     # If you have a local registry, uncomment the next line:
     # registry=REGISTRY,
@@ -166,7 +153,7 @@ k8s_yaml([
 
 k8s_resource(
     'inventory-service',
-    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+    port_forwards='8081:8080', # Map local port 8081 to container port 8080
 )
 
 # --- Notification Service ---
@@ -184,8 +171,7 @@ docker_build(
     dockerfile='cloud/notification-service/Dockerfile',
     live_update=[
         sync('cloud/notification-service/target/notification-service-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
-        # For Java apps, a full restart is often needed for changes to take effect.
-        # You might add: run('kill 1') here to force a restart.
+        run('kill 1'), # Force restart to pick up config changes
     ],
     # If you have a local registry, uncomment the next line:
     # registry=REGISTRY,
@@ -198,7 +184,7 @@ k8s_yaml([
 
 k8s_resource(
     'notification-service',
-    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+    port_forwards='8082:8080', # Map local port 8082 to container port 8080
 )
 
 # --- Order Service ---
@@ -230,7 +216,7 @@ k8s_yaml([
 
 k8s_resource(
     'order-service',
-    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+    port_forwards='8083:8080', # Map local port 8083 to container port 8080
 )
 
 # --- Payment Service ---
@@ -262,7 +248,7 @@ k8s_yaml([
 
 k8s_resource(
     'payment-service',
-    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+    port_forwards='8084:8080', # Map local port 8084 to container port 8080
 )
 
 # --- Product Service ---
@@ -294,7 +280,7 @@ k8s_yaml([
 
 k8s_resource(
     'product-service',
-    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+    port_forwards='8085:8080', # Map local port 8085 to container port 8080
 )
 
 # --- User Service ---
@@ -326,17 +312,51 @@ k8s_yaml([
 
 k8s_resource(
     'user-service',
-    port_forwards='8080:8080', # Map local port 8080 to container port 8080
+    port_forwards='8086:8080', # Map local port 8086 to container port 8080
+)
+
+# --- API Gateway Service ---
+local_resource(
+    'api-gateway-build',
+    cmd='mvn clean install -DskipTests',
+    dir='cloud/api-gateway',
+    deps=['cloud/api-gateway/pom.xml', 'cloud/api-gateway/src'],
+    trigger_mode=TRIGGER_MODE_AUTO,
+)
+
+docker_build(
+    'arturix/api-gateway', # Image name for API Gateway
+    context='cloud/api-gateway',
+    dockerfile='cloud/api-gateway/Dockerfile',
+    live_update=[
+        sync('cloud/api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar', '/app/app.jar'),
+        # For Java apps, a full restart is often needed for changes to take effect.
+        # You might add: run('kill 1') here to force a restart.
+    ],
+    # If you have a local registry, uncomment the next line:
+    # registry=REGISTRY,
+)
+
+k8s_yaml([
+    'argocd/base/api-gateway/deployment.yaml',
+    'argocd/base/api-gateway/service.yaml',
+    'argocd/base/api-gateway/ingress.yaml',
+])
+
+k8s_resource(
+    'api-gateway',
+    port_forwards='8088:8080', # Map local port 8088 to container port 8080
 )
 
 # --- Kafka Components ---
+
 k8s_yaml('argocd/base/kafka/kafka.yaml')
 k8s_yaml('argocd/base/kafka/kafka-ui-ingress.yaml')
 
 k8s_resource('zookeeper-1', port_forwards='2181:2181')
 k8s_resource('kafka-broker-1', port_forwards='9092:9092')
 k8s_resource('kafka-broker-2', port_forwards='9093:9093')
-k8s_resource('kafka-monitoring-ui', port_forwards='8082:8082')
+k8s_resource('kafka-monitoring-ui', port_forwards='8087:8082')
 
 # --- General Tilt Settings ---
 

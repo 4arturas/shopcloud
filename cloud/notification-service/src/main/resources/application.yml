@@ -3,6 +3,8 @@ spring:
     name: notification-service
   config:
     import: "optional:configserver:http://config-server:8080"
+  kafka:
+    bootstrap-servers: kafka-broker-1:29092,kafka-broker-2:29093
 
 server:
   port: 8080
