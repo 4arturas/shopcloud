@@ -257,7 +257,6 @@ spec:
             - |
               sleep 30
               kafka-topics --bootstrap-server kafka-broker-1:29092 --create --if-not-exists --topic upload-document-event --replication-factor 2 --partitions 2
-              kafka-topics --bootstrap-server kafka-broker-1:29092 --create --if-not-exists --topic order-placed --replication-factor 2 --partitions 2
               kafka-topics --bootstrap-server kafka-broker-1:29092 --list
           resources:
             requests:
