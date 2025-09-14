@@ -34,7 +34,6 @@ public class OrderService {
     private KafkaTemplate<String, String> kafkaTemplate;
 
     public Order createOrder(Order order) {
-        // In a real application, you would validate the user and product
         Product product = productClient.findById(order.getProductId());
         User user = userClient.findById(order.getUserId());
         Inventory inventory = inventoryClient.getInventoryByProductId(order.getProductId());
