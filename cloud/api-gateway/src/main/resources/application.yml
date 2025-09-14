@@ -15,11 +15,6 @@ spring:
               uri: lb://user-service
               predicates:
                 - Path=/api/users/**
-              filters:
-                - name: CircuitBreaker
-                  args:
-                    name: default
-                    fallbackuri: /fallback
             - id: product-service
               uri: lb://product-service
               predicates:
@@ -115,16 +110,4 @@ springdoc:
 
 server:
   port: 8080
-
-resilience4j.circuitbreaker:
-  instances:
-    default:
-      registerHealthIndicator: true
-      slidingWindowSize: 10
-      minimumNumberOfCalls: 5
-      permittedNumberOfCallsInHalfOpenState: 3
-      automaticTransitionFromOpenToHalfOpenEnabled: true
-      waitDurationInOpenState: 5s
-      failureRateThreshold: 50
-      eventConsumerBufferSize: 10
 
