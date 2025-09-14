@@ -11,6 +11,10 @@ spring:
             locator:
               enabled: true
           routes:
+            - id: swagger-ui
+              uri: lb://api-gateway
+              predicates:
+                - Path=/swagger-ui/**,/swagger-resources/**,/swagger-ui.html,/v3/api-docs,/webjars/**
             - id: user-service
               uri: lb://user-service
               predicates:
